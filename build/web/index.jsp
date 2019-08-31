@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-       
+        <a href="./amortizacao-americano.jsp">Amortização Americano</a>
     </body>
 </html>
