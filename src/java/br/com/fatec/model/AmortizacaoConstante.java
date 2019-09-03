@@ -20,12 +20,14 @@ public class AmortizacaoConstante {
     private double valorTotaldosJuros;
     private double valorTotalDaAmortizacao;
     private double valorTotalDasPrestacoes;
+    private double valorTotalInicial;
 
     public AmortizacaoConstante(int quantidadeDeMeses, double valorTotal, double juros) {
         this.quantidadeDeMeses = quantidadeDeMeses;
         this.valorTotal = valorTotal;
-        this.juros = juros;
+        this.juros = juros/100;
         this.setAmortizacao();
+        
     }
 
     private void setAmortizacao() {
@@ -33,6 +35,7 @@ public class AmortizacaoConstante {
     }
 
     public double calcularJurosAtual() {
+        
         this.ultimoJurosCalculado = this.valorTotal * this.juros;
         this.setValorTotalDosJuros(ultimoJurosCalculado);
         return this.ultimoJurosCalculado;
@@ -42,8 +45,7 @@ public class AmortizacaoConstante {
         double valorPrestacaoAtual = this.amortizacao + this.ultimoJurosCalculado;
         this.setValorTotalDasPrestacoes(valorPrestacaoAtual);
         this.valorTotalDaAmortizacao += this.amortizacao;
-        
-        AjustarValorTotal();
+          AjustarValorTotal();
     return valorPrestacaoAtual;
     }
 
@@ -54,11 +56,12 @@ public class AmortizacaoConstante {
     }
 
     public double getValorTotal() {
-        return valorTotal;
+       
+        return valorTotal - this.amortizacao;
     }
     
      private void AjustarValorTotal() {
-        if (this.valorTotal != 0) {
+        if (this.valorTotal >= 0) {
             this.valorTotal -= this.amortizacao;
         }
     }
